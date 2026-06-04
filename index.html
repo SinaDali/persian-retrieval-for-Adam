@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fa" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Persian Pattern Retrieval • SinaDali</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+  
+  body {
+    background: #020202;
+    color: #39ff14;
+    font-family: 'VT323', monospace;
+  }
+  
+  .crt {
+    background: #0a0a0a;
+    border: 18px solid #1a1a1a;
+    box-shadow: 0 0 90px rgba(0,0,0,0.99), inset 0 0 160px rgba(57,255,20,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(57,255,20,0.18) 3px, rgba(57,255,20,0.18) 6px);
+    animation: scan 3s linear infinite;
+    z-index: 5;
+  }
+  
+  @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  
+  .phosphor {
+    font-size: 3rem;
+    text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14;
+    letter-spacing: 8px;
+  }
+  
+  .memory-card {
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    border: 4px solid #39ff14;
+    box-shadow: 0 0 50px rgba(57,255,20,0.5);
+    position: relative;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body class="min-h-screen py-8 px-4">
+
+<div class="max-w-4xl mx-auto">
+  <div class="text-center mb-10">
+    <h1 class="text-6xl tracking-widest">PERSIAN PATTERN</h1>
+    <p class="text-3xl text-[#39ff14]/90">RETRIEVAL ARCHIVE</p>
+    <p class="mt-6 text-xl">A Personal Tribute by <span class="text-white">SinaDali</span> for @adamilenich</p>
+  </div>
+
+  <div class="crt rounded-3xl p-10 mb-10">
+    <div class="scanlines"></div>
+    
+    <div id="display" class="phosphor bg-black/90 min-h-[160px] flex items-center justify-center text-center p-8 rounded-2xl border border-[#39ff14]/40 mb-8">
+      PATTERN RETRIEVAL
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <p class="text-sm mb-2">YOUR ECHO</p>
+        <input id="input" type="text" value="Echoes of Persepolis" 
+               class="w-full bg-black border-2 border-[#39ff14]/60 text-[#39ff14] p-4 rounded-2xl">
+      </div>
+      <div>
+        <p class="text-sm mb-2">YOUR X HANDLE</p>
+        <input id="username" type="text" value="@Sinam_Salmasi" 
+               class="w-full bg-black border-2 border-[#39ff14]/60 text-[#39ff14] p-4 rounded-2xl">
+      </div>
+    </div>
+
+    <div class="flex gap-4 justify-center mt-8">
+      <button onclick="shatter()" class="px-12 py-5 bg-[#39ff14] text-black font-bold rounded-2xl text-xl">SHATTER</button>
+      <button onclick="recallAndGenerate()" class="px-12 py-5 border-2 border-[#39ff14] text-[#39ff14] font-bold rounded-2xl text-xl">RECALL + MEMORY CARD</button>
+    </div>
+  </div>
+
+  <!-- Memory Card -->
+  <div id="memoryCard" class="hidden memory-card rounded-3xl p-8 max-w-lg mx-auto text-center">
+    <div class="text-xs tracking-widest text-[#39ff14]/70 mb-4">ARCHIVE RETRIEVAL #001 • PERSIAN ECHO</div>
+    
+    <img id="avatar" src="https://unavatar.io/x/Sinam_Salmasi" 
+         class="w-28 h-28 mx-auto rounded-full border-4 border-[#39ff14] mb-6 object-cover">
+    
+    <div id="cardText" class="text-2xl min-h-[100px] mb-6 leading-tight text-[#39ff14]"></div>
+    
+    <div id="cardUser" class="text-4xl text-white mb-1"></div>
+    <div class="text-sm text-[#39ff14]/70 mb-8">Retrieved by SinaDali • For @adamilenich</div>
+    
+    <div class="flex gap-4 justify-center">
+      <button onclick="shareOnX()" 
+              class="px-8 py-4 bg-[#1DA1F2] hover:bg-[#1a91da] text-white font-bold rounded-2xl">
+        SHARE ON X
+      </button>
+      <button onclick="downloadCard()" 
+              class="px-8 py-4 bg-[#39ff14] hover:bg-white text-black font-bold rounded-2xl">
+        DOWNLOAD IMAGE
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let original = "";
+
+function shatter() {
+  const input = document.getElementById("input");
+  original = input.value || "PATTERN RETRIEVAL";
+  const display = document.getElementById("display");
+  let text = original.split("");
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i < text.length) {
+      text[i] = ["█","▓","▒","░","▀","▌","▐","■","▣"][Math.floor(Math.random()*9)];
+      display.textContent = text.join("");
+      i++;
+    } else clearInterval(interval);
+  }, 26);
+}
+
+function recallAndGenerate() {
+  const input = document.getElementById("input");
+  original = input.value || "PATTERN RETRIEVAL";
+  
+  const display = document.getElementById("display");
+  let current = display.textContent.split("");
+  const target = original.split("");
+  
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i < current.length) {
+      if (Math.random() > 0.25) current[i] = target[i];
+      display.textContent = current.join("");
+      i++;
+    } else {
+      clearInterval(interval);
+      display.textContent = original;
+      generateMemoryCard();
+    }
+  }, 52);
+}
+
+function generateMemoryCard() {
+  const usernameInput = document.getElementById("username").value.trim();
+  const username = usernameInput.startsWith('@') ? usernameInput.substring(1) : usernameInput;
+  const phrase = document.getElementById("input").value;
+
+  document.getElementById("avatar").src = `https://unavatar.io/x/${username || 'twitter'}`;
+  document.getElementById("cardText").textContent = phrase;
+  document.getElementById("cardUser").textContent = `@${username || 'anonymous'}`;
+  
+  document.getElementById("memoryCard").classList.remove("hidden");
+}
+
+function shareOnX() {
+  const username = document.getElementById("username").value || "@anonymous";
+  const phrase = document.getElementById("input").value;
+  const text = `My Persian Pattern just got retrieved! ✨\nMade by @Sinam_Salmasi for @adamilenich\n\n"${phrase}"`;
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`, '_blank');
+}
+
+function downloadCard() {
+  const card = document.getElementById("memoryCard");
+  html2canvas(card, { scale: 2 }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "Persian-Pattern-Memory-Card.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
+</script>
+
+</body>
+</html>
