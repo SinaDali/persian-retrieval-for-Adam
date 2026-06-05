@@ -17,8 +17,8 @@
   
   .crt {
     background: #0a0a0a;
-    border: 18px solid #1a1a1a;
-    box-shadow: 0 0 90px rgba(0,0,0,0.99), inset 0 0 160px rgba(57,255,20,0.2);
+    border: 20px solid #1a1a1a;
+    box-shadow: 0 0 100px rgba(0,0,0,0.99), inset 0 0 180px rgba(57,255,20,0.25);
     position: relative;
     overflow: hidden;
   }
@@ -26,84 +26,90 @@
   .scanlines {
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(57,255,20,0.18) 3px, rgba(57,255,20,0.18) 6px);
-    animation: scan 3s linear infinite;
+    background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(57,255,20,0.22) 3px, rgba(57,255,20,0.22) 6px);
+    animation: scan 2.5s linear infinite;
     z-index: 5;
   }
   
   @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
   
   .phosphor {
-    font-size: 3rem;
-    text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14;
-    letter-spacing: 8px;
+    font-size: 2.8rem;
+    text-shadow: 0 0 25px #39ff14, 0 0 50px #39ff14;
+    letter-spacing: 6px;
   }
   
-  .memory-card {
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-    border: 4px solid #39ff14;
-    box-shadow: 0 0 50px rgba(57,255,20,0.5);
-    position: relative;
-    overflow: hidden;
+  .kale {
+    width: 140px;
+    height: 140px;
+    border: 5px solid #39ff14;
+    border-radius: 50%;
+    box-shadow: 0 0 30px #39ff14;
+    animation: pulse 1.5s infinite alternate;
+  }
+  
+  @keyframes pulse {
+    from { transform: scale(0.95); }
+    to { transform: scale(1.05); }
   }
 </style>
 </head>
 <body class="min-h-screen py-8 px-4">
 
 <div class="max-w-4xl mx-auto">
-  <div class="text-center mb-10">
+  <div class="text-center mb-8">
     <h1 class="text-6xl tracking-widest">PERSIAN PATTERN</h1>
     <p class="text-3xl text-[#39ff14]/90">RETRIEVAL ARCHIVE</p>
-    <p class="mt-6 text-xl">A Personal Tribute by <span class="text-white">SinaDali</span> for @adamilenich</p>
+  </div>
+
+  <!-- Dedication -->
+  <div class="text-center mb-6">
+    <p class="text-2xl text-[#39ff14]">Dear @adamilenich</p>
+    <p class="text-sm text-[#39ff14]/70">A chaotic Persian tribute from SinaDali</p>
   </div>
 
   <div class="crt rounded-3xl p-10 mb-10">
     <div class="scanlines"></div>
     
-    <div id="display" class="phosphor bg-black/90 min-h-[160px] flex items-center justify-center text-center p-8 rounded-2xl border border-[#39ff14]/40 mb-8">
-      PATTERN RETRIEVAL
+    <div id="display" class="phosphor bg-black/90 min-h-[260px] flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-[#39ff14]/40 mb-8 gap-6">
+      <!-- Kale always visible -->
+      <img id="kale" src="kale.png" class="kale">
+      <div id="mainText" class="mt-4">PATTERN RETRIEVAL</div>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6">
       <div>
         <p class="text-sm mb-2">YOUR ECHO</p>
-        <input id="input" type="text" value="Echoes of Persepolis" 
-               class="w-full bg-black border-2 border-[#39ff14]/60 text-[#39ff14] p-4 rounded-2xl">
+        <input id="input" type="text" value="Hakhamanesh Echo" 
+               class="w-full bg-black border-2 border-[#39ff14]/60 text-[#39ff14] p-4 rounded-2xl text-xl">
       </div>
       <div>
         <p class="text-sm mb-2">YOUR X HANDLE</p>
         <input id="username" type="text" value="@Sinam_Salmasi" 
-               class="w-full bg-black border-2 border-[#39ff14]/60 text-[#39ff14] p-4 rounded-2xl">
+               class="w-full bg-black border-2 border-[#39ff14]/60 text-[#39ff14] p-4 rounded-2xl text-xl">
       </div>
     </div>
 
     <div class="flex gap-4 justify-center mt-8">
-      <button onclick="shatter()" class="px-12 py-5 bg-[#39ff14] text-black font-bold rounded-2xl text-xl">SHATTER</button>
-      <button onclick="recallAndGenerate()" class="px-12 py-5 border-2 border-[#39ff14] text-[#39ff14] font-bold rounded-2xl text-xl">RECALL + MEMORY CARD</button>
+      <button onclick="shatter()" class="px-14 py-6 bg-[#39ff14] text-black font-bold rounded-2xl text-xl">SHATTER</button>
+      <button onclick="recallAndGenerate()" class="px-14 py-6 border-2 border-[#39ff14] text-[#39ff14] font-bold rounded-2xl text-xl">RECALL + CARD</button>
     </div>
   </div>
 
   <!-- Memory Card -->
   <div id="memoryCard" class="hidden memory-card rounded-3xl p-8 max-w-lg mx-auto text-center">
-    <div class="text-xs tracking-widest text-[#39ff14]/70 mb-4">ARCHIVE RETRIEVAL #001 • PERSIAN ECHO</div>
+    <div class="text-xs tracking-widest text-[#39ff14]/70 mb-4">ARCHIVE RETRIEVAL • PERSIAN CHAOS</div>
     
-    <img id="avatar" src="https://unavatar.io/x/Sinam_Salmasi" 
-         class="w-28 h-28 mx-auto rounded-full border-4 border-[#39ff14] mb-6 object-cover">
+    <img id="avatar" src="https://unavatar.io/x/Sinam_Salmasi" class="w-28 h-28 mx-auto rounded-full border-4 border-[#39ff14] mb-6">
     
-    <div id="cardText" class="text-2xl min-h-[100px] mb-6 leading-tight text-[#39ff14]"></div>
+    <div id="cardText" class="text-2xl min-h-[110px] mb-6 leading-tight text-[#39ff14]"></div>
     
     <div id="cardUser" class="text-4xl text-white mb-1"></div>
     <div class="text-sm text-[#39ff14]/70 mb-8">Retrieved by SinaDali • For @adamilenich</div>
     
     <div class="flex gap-4 justify-center">
-      <button onclick="shareOnX()" 
-              class="px-8 py-4 bg-[#1DA1F2] hover:bg-[#1a91da] text-white font-bold rounded-2xl">
-        SHARE ON X
-      </button>
-      <button onclick="downloadCard()" 
-              class="px-8 py-4 bg-[#39ff14] hover:bg-white text-black font-bold rounded-2xl">
-        DOWNLOAD IMAGE
-      </button>
+      <button onclick="shareOnX()" class="px-8 py-4 bg-[#1DA1F2] text-white font-bold rounded-2xl">SHARE ON X</button>
+      <button onclick="downloadCard()" class="px-8 py-4 bg-[#39ff14] text-black font-bold rounded-2xl">DOWNLOAD IMAGE</button>
     </div>
   </div>
 </div>
@@ -111,41 +117,51 @@
 <script>
 let original = "";
 
+const persianChaos = ["𐎭","𐎣","𐎧","𐎱","𓂀","☠","❤","⚡","♛","🜁","∞","✦","🌀","🔥"];
+
 function shatter() {
   const input = document.getElementById("input");
   original = input.value || "PATTERN RETRIEVAL";
-  const display = document.getElementById("display");
+  const mainText = document.getElementById("mainText");
+  
   let text = original.split("");
   let i = 0;
+  
   const interval = setInterval(() => {
     if (i < text.length) {
-      text[i] = ["█","▓","▒","░","▀","▌","▐","■","▣"][Math.floor(Math.random()*9)];
-      display.textContent = text.join("");
+      if (Math.random() > 0.5) {
+        text[i] = persianChaos[Math.floor(Math.random() * persianChaos.length)];
+      } else {
+        text[i] = ["█","▓","▒","░","▀","▌","▐","■"][Math.floor(Math.random()*8)];
+      }
+      mainText.textContent = text.join("");
       i++;
-    } else clearInterval(interval);
-  }, 26);
+    } else {
+      clearInterval(interval);
+    }
+  }, 24);
 }
 
 function recallAndGenerate() {
   const input = document.getElementById("input");
   original = input.value || "PATTERN RETRIEVAL";
   
-  const display = document.getElementById("display");
-  let current = display.textContent.split("");
+  const mainText = document.getElementById("mainText");
+  let current = mainText.textContent.split("");
   const target = original.split("");
   
   let i = 0;
   const interval = setInterval(() => {
     if (i < current.length) {
-      if (Math.random() > 0.25) current[i] = target[i];
-      display.textContent = current.join("");
+      if (Math.random() > 0.22) current[i] = target[i];
+      mainText.textContent = current.join("");
       i++;
     } else {
       clearInterval(interval);
-      display.textContent = original;
+      mainText.textContent = original;
       generateMemoryCard();
     }
-  }, 52);
+  }, 45);
 }
 
 function generateMemoryCard() {
@@ -156,21 +172,20 @@ function generateMemoryCard() {
   document.getElementById("avatar").src = `https://unavatar.io/x/${username || 'twitter'}`;
   document.getElementById("cardText").textContent = phrase;
   document.getElementById("cardUser").textContent = `@${username || 'anonymous'}`;
-  
   document.getElementById("memoryCard").classList.remove("hidden");
 }
 
 function shareOnX() {
   const username = document.getElementById("username").value || "@anonymous";
   const phrase = document.getElementById("input").value;
-  const text = `My Persian Pattern just got retrieved! ✨\nMade by @Sinam_Salmasi for @adamilenich\n\n"${phrase}"`;
+  const text = `My Persian Pattern just got shattered and retrieved! 🔥\nMade by @Sinam_Salmasi for @adamilenich\n\n"${phrase}"`;
   const url = encodeURIComponent(window.location.href);
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`, '_blank');
 }
 
 function downloadCard() {
   const card = document.getElementById("memoryCard");
-  html2canvas(card, { scale: 2 }).then(canvas => {
+  html2canvas(card, { scale: 2.5 }).then(canvas => {
     const link = document.createElement("a");
     link.download = "Persian-Pattern-Memory-Card.png";
     link.href = canvas.toDataURL("image/png");
